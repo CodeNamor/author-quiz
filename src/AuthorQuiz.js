@@ -24,10 +24,11 @@ function Turn(author, books) {
       <img src={author.imageUrl} className="authorimage" alt="author" />
     </div>
     <div className="col-6">
-      {books.map((title) => <book title={title} key={title})}
+    {books.map((title) => <Book title={title} key={title}>  </Book>)}
     </div>
-  </div>)
-}
+  </div>);
+  }
+
 
 function Continue() {
     return null
