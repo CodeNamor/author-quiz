@@ -18,7 +18,7 @@ function Book({title}) {
   );
 }
 
-function Turn(author, books) {
+function Turn({author, books}) {
   return (<div className="row turn" style={{backgroundColor: "White"}}>
     <div className="col-4 offset-1">
       <img src={author.imageUrl} className="authorimage" alt="author" />
