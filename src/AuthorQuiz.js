@@ -47,7 +47,7 @@ function Turn({author, books, highlight, onAnswerSelected}) {
     }),
     books: PropTypes.arrayOf(PropTypes.string).isRequired,
     onAnswerSelected: PropTypes.func.isRequired,
-    highight: PropTypes.string.isRequired
+    //highight: PropTypes.string.isRequired
   };
 
 
