@@ -10,7 +10,7 @@ const state = {
     books: ['the Shining', 'IT', 'David Copperfield', 'A Tale of Two Cities', 'Hamlet'],
     author: {
       name: 'Charles Dickens',
-      imageUrl: 'images/authors/charlesdickens.jpg',
+      imageUrl: 'images/authors/marktwain.jpg',
       imageSource: 'Wikimedia Commons',
       books: ["David Copperfield", 'A Tale of Two Cities']
     },
