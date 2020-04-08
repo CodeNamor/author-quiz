@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter, Route} from 'react-router-dom';
 import './index.css';
 import AuthorQuiz from './AuthorQuiz';
 import * as serviceWorker from './serviceWorker';
@@ -53,6 +54,13 @@ function getTurnData(authors) {
     }
 }
 
+function AddAuthorForm(match) {
+    return <div>
+        <h1>Add Author</h1>
+        <p>{JSON.stringify(match)}</p>
+    </div>;
+}
+
 const state = {
     turnData: getTurnData(authors),
     highlight: '',
@@ -64,8 +72,18 @@ function onAnswerSelected(answer) {
     render();
 }
 
+function App() {
+    return <AuthorQuiz {...state} onAnswerSelected={onAnswerSelected} />;
+}
+
 function render() {
-    ReactDOM.render(<AuthorQuiz {...state} onAnswerSelected={onAnswerSelected} />, document.getElementById('root'));
+    ReactDOM.render(
+    <BrowserRouter>
+        <React.Fragment>
+            <Route exact path="/" component={App} />
+            <Route exact path="/add" component={AddAuthorForm} />
+        </React.Fragment>
+    </BrowserRouter>, document.getElementById('root'));
 }
 render();
 // If you want your app to work offline and load faster, you can change
