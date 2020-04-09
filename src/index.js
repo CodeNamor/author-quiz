@@ -5,6 +5,7 @@ import './index.css';
 import AuthorQuiz from './AuthorQuiz';
 import * as serviceWorker from './serviceWorker';
 import {shuffle, sample} from 'underscore';
+import AddAuthorForm from './AddAuthorForm';
 
 const authors = [
     {
@@ -52,13 +53,6 @@ function getTurnData(authors) {
             author.books.some((title) =>
                 title === answer))
     }
-}
-
-function AddAuthorForm(match) {
-    return <div>
-        <h1>Add Author</h1>
-        <p>{JSON.stringify(match)}</p>
-    </div>;
 }
 
 const state = {
