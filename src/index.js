@@ -82,12 +82,6 @@ let store = Redux.createStore(reducer);
 
 let state = resetState();
 
-function onAnswerSelected(answer) {
-    
-    state.highlight = isCorrect ? 'correct' : 'wrong';
-    render();
-}
-
 function App() {
     return <ReactRedux.Provider store={store}>
         <AuthorQuiz />;</ReactRedux.Provider>
