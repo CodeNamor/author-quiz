@@ -52,8 +52,16 @@ function Turn({author, books, highlight, onAnswerSelected}) {
   };
 
 
-function Continue() {
-    return null
+function Continue({ show, onContinue }) {
+  return (
+    <div className="row continue">
+      { show
+        ? <div className="col-11">
+            <button className="btn btn-primary btn-lg float-right" onClick={onContinue}>Continue</button>
+          </div>
+      : null }
+    </div>
+  );
 }
 
 function Footer() {
@@ -66,12 +74,12 @@ function Footer() {
   </div>)
 }
 
-function App({turnData, highlight, onAnswerSelected}) {
+function App({turnData, highlight, onAnswerSelected, onContinue}) {
   return (
     <div className="container-fluid">
       <Hero/>
       <Turn {...turnData} highlight={highlight} onAnswerSelected={onAnswerSelected} />
-      <Continue />
+      <Continue show={highlight === 'correct'} onContinue={onContinue}/>
       <p><Link to="/add">Add an Author</Link></p>
       <Footer />
     </div>

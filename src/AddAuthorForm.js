@@ -7,10 +7,12 @@ class AuthorForm extends React.Component {
         this.state = {
             name: '',
             imageUrl: '',
-            books: []
+            books: [],
+            bookTemp: ''
         };
         this.onFieldChange = this.onFieldChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleAddBook = this.handleAddBook.bind(this);
     }
     handleSubmit(event) {
         event.preventDefault();
@@ -19,6 +21,12 @@ class AuthorForm extends React.Component {
     onFieldChange(event) {
         this.setState({
             [event.target.name]: event.target.value
+        });
+    }
+    handleAddBook(event) {
+        this.setState({
+            books: this.state.books.concat([this.state.bookTemp]),
+            bookTemp: ''
         });
     }
     render() {
@@ -32,7 +40,10 @@ class AuthorForm extends React.Component {
             <input type="text" name="imageUrl" value={this.state.imageUrl} onChange={this.onFieldChange}></input>
         </div>
         <div className="AddAuthorForm__input">
-            {this.state.books.map((book) => <p>{book}</p>)}
+            {this.state.books.map((book) => <p key={book}>{book}</p>)}
+            <label htlmFor="bookTemp">Books</label>
+            <input type="text" name="bookTemp" value={this.state.bookTemp} onChange={this.onFieldChange} />
+            <input type="button" value="+" onclick={this.handleAddBook} />
         </div>
         <div>
             <input type="submit" value="Add"></input>
@@ -41,10 +52,10 @@ class AuthorForm extends React.Component {
     }
 }
 
-function AddAuthorForm(match, onAddAuthor) {
+function AddAuthorForm({match, onAddAuthor}) {
     return <div className="AddAuthorForm">
         <h1>Add Author</h1>
-        <AuthorForm onAddAuthor={onAddAuthor}></AuthorForm>
+        <AuthorForm onAddAuthor={onAddAuthor}/>
     </div>;
 }
 
