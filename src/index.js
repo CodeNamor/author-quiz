@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import * as Redux from 'redux';
+import * as ReactRedux from 'react-redux';
 import {BrowserRouter, Route, withRouter } from 'react-router-dom';
 import './index.css';
 import AuthorQuiz from './AuthorQuiz';
 import * as serviceWorker from './serviceWorker';
 import {shuffle, sample} from 'underscore';
 import AddAuthorForm from './AddAuthorForm';
+
 
 const authors = [
     {
@@ -61,22 +64,33 @@ function resetState() {
         highlight: ''
     };
 }
+function reducer(state = {authors, turnData: getTurnData(authors), highlight: ''}, action) {
+    switch (action.type) {
+        case 'ANSWER_SELECTED':
+            const isCorrect = state.turnData.author.books.some((book) => book === action.authors);
+            return Object.assigh({}, state, {
+                highlight: isCorrect ? 'correct' : 'wrong'
+            });
+        default:
+            return state
+
+    }
+    return state;
+}
+
+let store = Redux.createStore(reducer);
 
 let state = resetState();
 
 function onAnswerSelected(answer) {
-    const isCorrect = state.turnData.author.books.some((book) => book === answer);
+    
     state.highlight = isCorrect ? 'correct' : 'wrong';
     render();
 }
 
 function App() {
-    return <AuthorQuiz {...state} 
-        onAnswerSelected={onAnswerSelected} 
-        onContinue={() => {
-        state = resetState();
-        render(); 
-    }} />;
+    return <ReactRedux.Provider store={store}>
+        <AuthorQuiz />;</ReactRedux.Provider>
 }
 
 const AuthorWrapper = withRouter(({ history }) =>
